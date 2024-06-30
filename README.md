@@ -22,13 +22,13 @@ If not, then Player 2 wins the game.
 - 'O' indicates a correct digit in the wrong position.
 - '-' indicates an incorrect digit.
   Examples:
-  ** Secret number: 1234
-  ** Guess: 1256
-  ** Feedback: XX-- (1 and 2 are correct and in the correct position)
+  * Secret number: 1234
+  * Guess: 1256
+  * Feedback: XX-- (1 and 2 are correct and in the correct position)
 
-  ** Secret number: 5678
-  ** Guess: 5789
-  ** Feedback: OOX- (5 and 7 are correct but in the wrong position, 8 is correct and in the correct position)
+  * Secret number: 5678
+  * Guess: 5789
+  * Feedback: OOX- (5 and 7 are correct but in the wrong position, 8 is correct and in the correct position)
 4. The game continues until Player 2 guesses the secret number.
 
 5. Roles switch for round 2: Player 2 sets a secret number, and Player 1 guesses.
