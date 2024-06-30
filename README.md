@@ -53,7 +53,7 @@ You can install the required packages using pip:
 pip install PyQt5
 
 ```
-# Screenshots 
+## Screenshots 
 <p align="center">
   <img src="Screenshot 1.png" width="250" />
   <img src="Screenshot 2.png" width="250" />
