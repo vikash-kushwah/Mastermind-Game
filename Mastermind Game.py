@@ -10,7 +10,7 @@ import csv
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout, QMessageBox, QInputDialog
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QTimer, QTime
-
+from database import Database  # Import the database module
 
 class MastermindGame(QWidget):
     def __init__(self):
@@ -21,7 +21,7 @@ class MastermindGame(QWidget):
         self.time = QTime(0, 0, 0)
         self.game_number = 1  # Initialize game number
         self.init_game_data_storage()
-
+        self.db = Database()  # Initialize the database connection
 
     def initUI(self):
         self.setWindowTitle('Mastermind Guess Game')
@@ -148,9 +148,7 @@ class MastermindGame(QWidget):
         self.round = 1  # Keep track of the current round
 
     def init_game_data_storage(self):
-        with open('game_data.csv', 'w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Game Number", "Player 1", "Player 2", "Time Taken", "Number of Guesses"])
+        self.db.create_table()  # Create the table if it doesn't exist
 
     def start_game(self):
         if self.game_in_progress:
@@ -249,25 +247,28 @@ class MastermindGame(QWidget):
 
         # Determine the winner based on the fewest attempts across both rounds
         if self.player1_attempts < self.player2_attempts:
+            winner = self.player1
             winner_msg = f'{self.player1} is the Mastermind! They guessed the number in {self.player1_attempts} attempts. Time taken: {elapsed_time}'
         elif self.player2_attempts < self.player1_attempts:
+            winner = self.player2
             winner_msg = f'{self.player2} is the Mastermind! They guessed the number in {self.player2_attempts} attempts. Time taken: {elapsed_time}'
         else:
+            winner = "Tie"
             winner_msg = f'It\'s a tie! Both players are Masterminds. Time taken: {elapsed_time}'
         
         QMessageBox.information(self, 'Game Over', winner_msg)
+        self.save_game_data(elapsed_time, winner)  # Save game data to the database
         play_again = QMessageBox.question(self, 'Play Again?', 'Do you want to play again?', QMessageBox.Yes | QMessageBox.No)
         if play_again == QMessageBox.Yes:
             self.reset_game()
         else:
             self.close()
     
-    def save_game_data(self, elapsed_time):
-        with open('game_data.csv', 'a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([self.game_number, self.player1, self.player2, elapsed_time, self.attempts])
+    def save_game_data(self, elapsed_time, winner):
+        time_parts = elapsed_time.split(':')
+        time_taken = f"{time_parts[0]}:{time_parts[1]}:{time_parts[2]}"
+        self.db.insert_game_result(self.game_number, self.player1, self.player2, time_taken, self.attempts, winner)  # Save to database
         self.game_number += 1
-
 
     def reset_game(self):
         self.start_button.setEnabled(True)
@@ -290,3 +291,4 @@ if __name__ == '__main__':
     game = MastermindGame()
     game.show()
     sys.exit(app.exec_())
+    

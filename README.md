@@ -46,13 +46,51 @@ If not, then Player 2 wins the game.
 
 - Python 3.x
 - PyQt5
+- MySQL Connector
 
 You can install the required packages using pip:
 
 ```sh
-pip install PyQt5
-
+pip install PyQt5 mysql-connector-python
 ```
+
+## MySQL Database
+
+This project uses a MySQL database to store game results.
+
+### Database Schema
+
+**Database Name:** mastermind_game
+
+**Table Name:** game_results
+
+**Schema:**
+- id (INT, Primary Key, Auto Increment)
+- game_number (INT)
+- player1 (VARCHAR(50))
+- player2 (VARCHAR(50))
+- time_taken (TIME)
+- number_of_guesses (INT)
+- winner (VARCHAR(50))
+
+### Example SQL to Create the Database and Table
+
+```sql
+CREATE DATABASE mastermind_game;
+
+USE mastermind_game;
+
+CREATE TABLE game_results (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    game_number INT,
+    player1 VARCHAR(50),
+    player2 VARCHAR(50),
+    time_taken TIME,
+    number_of_guesses INT,
+    winner VARCHAR(50)
+);
+```
+
 ## Screenshots 
 <p align="center">
   <img src="Screenshot 1.png" width="250" />
@@ -61,5 +99,3 @@ pip install PyQt5
   <img src="Screenshot 4.png" width="250" />
   <img src="Screenshot 5.png" width="250" />
 </p>
-
-
