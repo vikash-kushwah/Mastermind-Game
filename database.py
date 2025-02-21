@@ -31,7 +31,8 @@ class Database:
             player2 VARCHAR(50),
             time_taken TIME,
             number_of_guesses INT,
-            winner VARCHAR(50)
+            winner VARCHAR(50),
+            date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         """
         with self.connection.cursor() as cursor:

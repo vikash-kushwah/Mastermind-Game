@@ -47,6 +47,8 @@ If not, then Player 2 wins the game.
 - Python 3.x
 - PyQt5
 - MySQL Connector
+- python-dotenv
+
 
 You can install the required packages using pip:
 
@@ -72,6 +74,7 @@ This project uses a MySQL database to store game results.
 - time_taken (TIME)
 - number_of_guesses (INT)
 - winner (VARCHAR(50))
+- date (TIMESTAMP, Default: CURRENT_TIMESTAMP)
 
 ### Example SQL to Create the Database and Table
 
@@ -87,7 +90,8 @@ CREATE TABLE game_results (
     player2 VARCHAR(50),
     time_taken TIME,
     number_of_guesses INT,
-    winner VARCHAR(50)
+    winner VARCHAR(50),
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
 

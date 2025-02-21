@@ -2,7 +2,7 @@
 """
 Created on Sun Jun 28 00:39:50 2024
 
-@author: vikash kushwaha
+Author: Vikash Kushwaha
 """
 
 import sys
@@ -15,13 +15,13 @@ from database import Database  # Import the database module
 class MastermindGame(QWidget):
     def __init__(self):
         super().__init__()
+        self.db = Database()  # Initialize the database connection
         self.initUI()
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_timer)
         self.time = QTime(0, 0, 0)
         self.game_number = 1  # Initialize game number
         self.init_game_data_storage()
-        self.db = Database()  # Initialize the database connection
 
     def initUI(self):
         self.setWindowTitle('Mastermind Guess Game')
@@ -291,4 +291,3 @@ if __name__ == '__main__':
     game = MastermindGame()
     game.show()
     sys.exit(app.exec_())
-    
