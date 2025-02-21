@@ -1,5 +1,4 @@
-# CBTCIP
-MASTERMIND GAME
+# MASTERMIND GAME
 
 Two players play the game against each other; let’s assume Player 1 and Player 2.
 
