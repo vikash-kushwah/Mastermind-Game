@@ -38,7 +38,7 @@ If not, then Player 2 wins the game.
 ## Features
 
 - Two-player mode
-- Customizable number of digits (1 to 5)
+- Customizable number of digits (1 to 8)
 - Intuitive GUI with PyQt5
 - Feedback provided for each guess in the form of 'X', 'O', and '-'
 
